@@ -44,7 +44,7 @@ public class PetController {
 	}
 	
 	@PutMapping("/pets/{id}")
-	//@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody Pet pet) {
 
 		if (petService.updatePet(pet, id) != null) {
@@ -59,7 +59,8 @@ public class PetController {
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Pet> createPet(@PathVariable Long id, @RequestBody Pet pet) {
 
-		return new ResponseEntity<>(pet, HttpStatus.CREATED) ;
+		
+		return new ResponseEntity<>(petService.createPetPet(pet), HttpStatus.CREATED);
 
 	}
 	@DeleteMapping("/pets/{id}")
